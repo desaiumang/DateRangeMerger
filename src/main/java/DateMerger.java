@@ -5,6 +5,9 @@ import java.util.List;
 public class DateMerger {
 
     public List<DateRange> mergeDate(List<DateRange> dateRanges) {
+        if(dateRanges == null) {
+            return null;
+        }
         dateRanges = sortDateRanges(dateRanges);
 
         for (int i = 0; i < dateRanges.size() - 1; i++) {
