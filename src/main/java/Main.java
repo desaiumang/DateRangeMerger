@@ -7,18 +7,19 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-        List<DateRange> dateRanges = getDefaultDateRanges();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
+        List<DateRange> dateRanges = getDefaultDateRanges(simpleDateFormat);
         DateMerger dateMerger = new DateMerger();
         List<DateRange> mergedDateRanges = dateMerger.mergeDate(dateRanges);
         for (DateRange dateRange : mergedDateRanges) {
-            System.out.println(dateRange.toString());
+            System.out.println(simpleDateFormat.format(dateRange.getStartDate())
+                    + " - " + simpleDateFormat.format(dateRange.getEndDate()));
         }
 
     }
 
-    private static List<DateRange> getDefaultDateRanges() throws ParseException {
+    private static List<DateRange> getDefaultDateRanges(SimpleDateFormat sdf) throws ParseException {
         List<DateRange> dateRanges = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
         dateRanges.add(new DateRange(sdf.parse("01 Jan 2014"), sdf.parse("30 Jan 2014")));
         dateRanges.add(new DateRange(sdf.parse("01 Jan 2014"), sdf.parse("29 Jan 2014")));
         dateRanges.add(new DateRange(sdf.parse("10 Mar 2014"), sdf.parse("15 Apr 2014")));
